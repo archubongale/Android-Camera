@@ -13,9 +13,12 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ShareActionProvider;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -27,13 +30,19 @@ public class MainActivity extends Activity {
 
     ImageView viewImage;
     Button b;
-
+    private ShareActionProvider mShareActionProvider;
+    private Intent mShareIntent;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mShareIntent = new Intent();
+        mShareIntent.setAction(Intent.ACTION_SEND);
+        mShareIntent.setType("text/plain");
+        mShareIntent.putExtra(Intent.EXTRA_TEXT, "From me to you, this text is new.");
 
         b=(Button)findViewById(R.id.btnSelectPhoto);
         viewImage=(ImageView)findViewById(R.id.viewImage);
@@ -138,6 +147,19 @@ public class MainActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        // Locate MenuItem with ShareActionProvider
+        MenuItem shareItem = (MenuItem) menu.findItem(R.id.menu_item_share);
+
+        // Get its ShareActionProvider
+        mShareActionProvider = (ShareActionProvider) shareItem.getActionProvider();
+
+        // Connect the dots: give the ShareActionProvider its Share Intent
+        if (mShareActionProvider != null) {
+            mShareActionProvider.setShareIntent(mShareIntent);
+        }
+
+        // Return true so Android will know we want to display the menu
         return true;
     }
 

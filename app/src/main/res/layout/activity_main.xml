@@ -12,17 +12,11 @@
         android:gravity="center"
         android:padding="5dp" >
 
-        <Button
-            android:id="@+id/btnSelectPhoto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Select Photo" />
-
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="317dp"
         android:orientation="vertical"
         android:padding="10dp" >
 
@@ -30,8 +24,16 @@
             android:id="@+id/viewImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/doggie" />
+            android:src="@drawable/doggie"
+            android:layout_marginTop="40sp"/>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSelectPhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Photo"
+        android:layout_gravity="center_horizontal"/>
 
 </LinearLayout> 
